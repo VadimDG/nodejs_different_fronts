@@ -1,0 +1,17 @@
+{
+  "name": "test1",
+  "version": "1.0.0",
+  "description": "na",
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "test": "echo \"test\""
+  },
+  "keywords": [
+    "test",
+    "node",
+    "js"
+  ],
+  "author": "me",
+  "license": "ISC"
+}
