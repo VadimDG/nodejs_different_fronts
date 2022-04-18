@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -16,6 +18,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './components/Shared/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,21 +31,26 @@ import { MatListModule } from '@angular/material/list';
     LabelComponent,
     ContactComponent,
     PlatformComponent,
-    UserEditComponent
+    UserEditComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
     
     MatListModule,
     MatTabsModule,
     MatSidenavModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

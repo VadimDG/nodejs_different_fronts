@@ -1,21 +1,37 @@
-const emitterModule = require('./file_emitter');
+import Express from 'express';
+import userController from './Controllers/user.js';
+import cors from 'cors';
 
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
+const app = Express();
+const port = process.env.port || 3000;
+
+app.use(Express.json());
+app.use(cors());
+
+app.get('/users', (req, res) => {
+    res.json(userController.getAllUsers())
 });
 
-emitterModule.emitter.on('myevent', data => {
-    console.log('ON: myevent', data);
-});
-
-const start = async () =>{
-    for await (const line of readline) {
-        console.log(`you entered: ${line}`);
-        emitterModule.emitf();
-        if (line === 'x') {
-            readline.close();
-        }
+app.get('/user/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    
+    if (!id) {
+        res.sendStatus(400);
     }
-}
-start();
+    
+    res.json(userController.getUserById(id))
+});
+
+app.post('/user', (req, res) => {
+    const result = res.json(userController.addUser(req.body));
+    if (result) {
+        res.sendStatus(400);
+    } else {
+        res.sendStatus(201);
+    }
+});
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}...`)
+})

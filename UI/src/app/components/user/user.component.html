@@ -1,1 +1,37 @@
-<p>user works!</p>
+<div *ngIf="!isInAddMode" class="example-button-row">
+    <button mat-raised-button (click)="addContact()">Add</button>
+</div>
+<div *ngIf="isInAddMode" class="example-button-row">
+    <button mat-raised-button (click)="addSaveContact()">Save</button>
+    <button mat-raised-button (click)="cancelAddContact()">Cancel</button>
+</div>
+<table class="own-table">
+    <tr>
+        <th *ngFor="let headerName of headers">{{ headerName }}</th>
+    </tr>
+    <tr *ngFor="let row of dataSource">
+        <td *ngFor="let headerName of headers">
+            <ng-container [ngSwitch]="headerName">
+                <div *ngSwitchCase="'action'">
+                    <button mat-icon-button color="primary" (click)="editContact(row)" title="Edit Contact"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button color="primary" (click)="deleteContact(row)" title="Delete Contact"><mat-icon>delete</mat-icon></button>
+                </div>
+
+                <ng-container *ngSwitchCase="'no'">
+                    <p>{{ getValue(row, 'no') }}</p>
+                </ng-container>
+            
+                <ng-container *ngSwitchDefault>
+                    <ng-container *ngIf="!getValue(row, 'isInEditMode')">
+                        <p>{{ getValue(row, headerName) }}</p>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="getValue(row, 'isInEditMode')">
+                        <input type="text" placeholder="Name" [(ngModel)]="name">
+                        <button mat-raised-button (click)="saveEdit(row)">Save</button>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </td>
+    </tr>
+</table>
