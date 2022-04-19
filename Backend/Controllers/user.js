@@ -2,7 +2,7 @@ const users = [{
     id: Date.now(),
     name: 'A-ha',
 }, {
-    id: Date.now(),
+    id: Date.now() + 1,
     name: 'Coldplay',
 }];
 

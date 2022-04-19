@@ -1,0 +1,42 @@
+<div *ngIf="!isInAddMode" class="example-button-row">
+    <button mat-raised-button (click)="addContact()">Add</button>
+</div>
+<div *ngIf="isInAddMode" class="example-button-row">
+    <button mat-raised-button (click)="addSaveContact()">Save</button>
+    <button mat-raised-button (click)="cancelAddContact()">Cancel</button>
+</div>
+<table class="own-table">
+    <tr>
+        <th *ngFor="let headerName of displayHeaders">{{ headerName }}</th>
+    </tr>
+    <tr *ngFor="let row of dataSource; let i = index">
+        <td>
+            <div *ngIf="!getValue(row, 'isInEditMode')">
+                <button mat-icon-button color="primary" (click)="editContact(row)" title="Edit Contact">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="deleteContact(row)" title="Delete Contact">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            <div *ngIf="getValue(row, 'isInEditMode')">
+                <button mat-icon-button color="primary" (click)="editContact(row)" title="Edit Contact">
+                    <mat-icon>save</mat-icon>
+                </button>
+                <button mat-icon-button (click)="cancelEditContact(row)"><mat-icon>cancel</mat-icon></button>
+            </div>
+        </td>
+        <td>
+            {{ i + 1 }}
+        </td>
+        <td *ngFor="let headerName of headers">
+            <ng-container *ngIf="!getValue(row, 'isInEditMode')">
+                <p>{{ getValue(row, headerName) }}</p>
+            </ng-container>
+    
+            <ng-container *ngIf="getValue(row, 'isInEditMode')">
+                <ng-content></ng-content>
+            </ng-container>
+        </td>
+    </tr>
+</table>

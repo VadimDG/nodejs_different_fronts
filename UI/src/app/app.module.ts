@@ -21,7 +21,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { FormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogComponent } from './components/Shared/dialog/dialog.component';
+import { DialogComponent } from './components/shared/dialog/dialog.component';
+import { TableComponent } from './components/shared/table/table.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DialogComponent } from './components/Shared/dialog/dialog.component';
     ContactComponent,
     PlatformComponent,
     UserEditComponent,
-    DialogComponent
+    DialogComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

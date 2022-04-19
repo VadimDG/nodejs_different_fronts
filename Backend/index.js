@@ -23,7 +23,7 @@ app.get('/user/:id', (req, res) => {
 });
 
 app.post('/user', (req, res) => {
-    const result = res.json(userController.addUser(req.body));
+    const result = userController.addUser(req.body);
     if (result) {
         res.sendStatus(400);
     } else {
@@ -31,6 +31,23 @@ app.post('/user', (req, res) => {
     }
 });
 
+app.put('/user/:id', (req, res) => {
+    const result = userController.editUser(id, req.body);
+    if (result) {
+        res.sendStatus(400);
+    } else {
+        res.sendStatus(200);
+    }
+});
+
+app.delete('/user/:id', (req, res) => {
+    const result = userController.deleteUser(id);
+    if (result) {
+        res.sendStatus(400);
+    } else {
+        res.sendStatus(200);
+    }
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}...`)
